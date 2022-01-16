@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 
 export default function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
-    const [count, setCount] = useState(1);
 
     const inputRef = useRef(null);
 
@@ -16,20 +15,12 @@ export default function TodoForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        setCount(count + 1);
-        //On Edit the id uses one because its a new Todo Form Component, so gotta make a random id
-        if (props.edit) {
-            // console.log('This is an edit');
-            props.onSubmit({
-                id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-                text: input
-            })
-        } else {
-            props.onSubmit({
-                id: count,
-                text: input
-            })
-        }
+        // console.log(props.edit)
+        props.onSubmit({
+            id: (props.edit) ? props.edit.id : null,
+            text: input
+        })
+
         setInput('');
     }
     return (
@@ -38,7 +29,7 @@ export default function TodoForm(props) {
                 <>
                     <input
                         type="text"
-                        placeholder='update todo'
+                        placeholder='Update todo'
                         value={input}
                         name='text'
                         className='todo-input edit'
@@ -50,7 +41,7 @@ export default function TodoForm(props) {
                 (<>
                     <input
                         type="text"
-                        placeholder='add a todo'
+                        placeholder='Add todo'
                         value={input}
                         name='text'
                         className='todo-input'

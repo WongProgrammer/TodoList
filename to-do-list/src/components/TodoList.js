@@ -4,16 +4,19 @@ import TodoForm
     from './TodoForm'
 function TodoList() {
     const [todos, setTodos] = useState([]);
+    const [count, setCount] = useState(1);
 
     const addTodo = todo => {
         //Checks if input has text or not
         if (!todo.text || /^\s*$/.test(todo.test)) {
             return;
         }
+        todo.id = count;
+        setCount(count + 1);
+
         const newTodos = [todo, ...todos]
 
         setTodos(newTodos);
-        // console.log(...todos);
     };
 
     const completeTodo = id => {

@@ -27,7 +27,7 @@ function Todo({ todos, completeTodo, editTodo, deleteTodo }) {
             key={index}
         >
             <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-                {todo.text}
+                {todo.id} : {todo.text}
             </div>
             <div className="icons">
                 <BiEditAlt
